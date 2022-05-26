@@ -5,12 +5,7 @@ export const Test = () => {
   const [result, setResult] = useState("");
 
   useEffect(() => {
-    const r = axios
-      .get("http://localhost:8080")
-      .then((res) => res.data)
-      .then((val) => alert(val))
-      .catch(() => alert("fail"));
-    console.log(r);
+    const r = TestCORS();
     setResult(r);
   }, []);
 
@@ -19,4 +14,10 @@ export const Test = () => {
       <p>${result} hihi</p>
     </div>
   );
+};
+
+const TestCORS = async () => {
+  const result = await axios.get("http://localhost:8080/api/test");
+  console.log(result.data);
+  return result;
 };
